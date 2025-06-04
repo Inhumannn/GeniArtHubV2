@@ -1,280 +1,401 @@
-@import url('https://fonts.googleapis.com/css2?family=Rum+Raisin&family=Source+Sans+3:wght@400;900&display=swap');
-html {
-    --scroll-behavior: smooth;
-    scroll-behavior: smooth;
+@import url("https://fonts.googleapis.com/css2?family=Rum+Raisin&family=Source+Sans+3:wght@400;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth !important;
+  box-sizing: border-box;
 }
 .row {
-    max-width: 1440px;
-    margin:auto;
-    width: 100%;
+  max-width: 1440px;
+  margin: auto;
+  width: 100%;
 }
 header {
-    background-color: black;
-    height:125px;
-    display: flex;
-    align-items: center;
+  background-color: black;
+  height: 125px;
+  display: flex;
+  align-items: center;
 }
 .hero {
-    background: #000;
-    margin:0;
-    min-height: calc(100vh - 125px);
-    display: flex;
-    background-image: url("../img/images-art.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+  background: #000;
+  margin: 0;
+  min-height: calc(100vh - 125px);
+  display: flex;
+  background-image: url("../img/images-art.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .hero h1 {
-    margin: 0;
-    padding:0;
-    color: #FFF;
-    text-align: center;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
 }
 
 .hero a {
-    background: #EE7F43;
-    display: inline-block;
-    color:#FFF;
-    text-align: center;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-    text-decoration: none;
-    padding:12px 57px;
-    margin-top: 50px;
+  background: #ee7f43;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-decoration: none;
+  padding: 12px 57px;
+  margin-top: 50px;
 }
 
 .hero .row {
-    text-align: center;
+  text-align: center;
 }
 
 .productlist {
-    max-width: 1440px;
-    margin:auto;
-    text-align: center;
+  max-width: 1440px;
+  margin: auto;
+  text-align: center;
 }
 .productlist > div {
-    position:relative;
+  position: relative;
 }
 .productlist > div > img {
-    margin:78px 0;
+  margin: 78px 0;
 }
 .productlist > div > a {
-    position: absolute;
-    top: 50%;
-    right: 0;
+  position: absolute;
+  top: 50%;
+  right: 0;
 }
 
 .productlist .products {
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:30px;
-    row-gap: 57px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  row-gap: 57px;
 }
 
 .products img {
-    width:100%;
+  width: 100%;
 }
 
 .products article {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 .products article a {
-    background: #EE7F43;
-    display: inline-block;
-    color:#FFF;
-    text-align: center;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-    text-decoration: none;
-    padding:12px 57px;
-    position:absolute;
-    z-index: 9;
-    bottom: -30px;
+  background: #ee7f43;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-decoration: none;
+  padding: 12px 57px;
+  position: absolute;
+  z-index: 9;
+  bottom: -30px;
 }
 
 footer {
-    margin-top: 100px;
-    background:#000;
-    text-align: center;
-    color:#FFF;
-    padding:20px 0;
+  margin-top: 100px;
+  background: #000;
+  text-align: center;
+  color: #fff;
+  padding: 20px 0;
 }
 footer p {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 footer a {
-    color:#fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
 .page header {
-    background-color: #fff;
-    margin: auto;
-    max-width: 1440px;
-    height:auto;
-    margin:41px auto 80px auto;
-   
+  background-color: #fff;
+  margin: auto;
+  max-width: 1440px;
+  height: auto;
+  margin: 41px auto 80px auto;
 }
 .page header div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .page header div {
-    position:relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 .page header a:nth-child(2) {
-    position:absolute;
-    top:50%;
-    right:0;
+  position: absolute;
+  top: 50%;
+  right: 0;
 }
 
 .detailoeuvre {
-    max-width: 1440px;
-    margin:auto;
+  max-width: 1440px;
+  margin: auto;
 }
 
 .detailoeuvre article {
-    display:grid; 
-    grid-template-columns: repeat(2, 1fr);
-    gap:85px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 85px;
 }
 
 figure {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 .detailoeuvre img {
-    width:100%;
-    height:100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .detailoeuvre article > div {
-    background-color: #F3F3F3;
-    width: 100%;
-    text-align: center;
+  background-color: #f3f3f3;
+  width: 100%;
+  text-align: center;
 }
 
 .detailoeuvre h1,
 .detailoeuvre h2 {
-    color: #000;
-    text-align: center;
-    font-family: 'Rum Raisin', sans-serif;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  text-align: center;
+  font-family: "Rum Raisin", sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .detailoeuvre article p {
-    color: #000;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 187.2%; /* 29.952px */
-    max-width: 80%;
-    margin: auto;
+  color: #000;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 187.2%; /* 29.952px */
+  max-width: 80%;
+  margin: auto;
 }
-div.price  {
-    margin-bottom: 80px;
+div.price {
+  margin-bottom: 80px;
 }
 article > div > div.price > p {
-    margin: auto;
-    margin-top: 80px;
-    text-align: center;
-    color: #EE7F43;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  margin: auto;
+  margin-top: 80px;
+  text-align: center;
+  color: #ee7f43;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .detailoeuvre .price .showprice {
-    display:block;
-    text-align: center;
-    font-family: 'Source Sans 3', sans-serif;
-    color: #000;
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  display: block;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+  color: #000;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .declinaison input {
-    border: 1px solid #EE7F43;
-    font-family: 'Source Sans 3', sans-serif;
-    height:66px;
-    /* width:83px; */
-    background-color: transparent;
-    text-align: center;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding: 0;
+  border: 1px solid #ee7f43;
+  font-family: "Source Sans 3", sans-serif;
+  height: 66px;
+  /* width:83px; */
+  background-color: transparent;
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 0;
 }
 .declinaison select {
-    border: 1px solid #EE7F43;
-    font-family: 'Source Sans 3', sans-serif;
-    height:66px;
-    background-color: transparent;
-    padding-left:12px;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-
+  border: 1px solid #ee7f43;
+  font-family: "Source Sans 3", sans-serif;
+  height: 66px;
+  background-color: transparent;
+  padding-left: 12px;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .declinaison {
-    display:grid;
-    grid-template-columns: 25% auto;
-    width:80%;
-    gap: 24px;
-    margin:auto;
+  display: grid;
+  grid-template-columns: 25% auto;
+  width: 80%;
+  gap: 24px;
+  margin: auto;
 }
 .button-buy {
-    color: #FFF;
-    text-align: center;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-    background: #EE7F43;
-    text-decoration: none;
-    padding:12px 57px;
-    margin: auto;
-    display: inline-block;
-    margin-top: 24px;
+  color: #fff;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  background: #ee7f43;
+  text-decoration: none;
+  padding: 12px 57px;
+  margin: auto;
+  display: inline-block;
+  margin-top: 24px;
 }
 .detailoeuvre h2 {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .detailoeuvre aside {
-    color: #000;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 24px;
-    font-style: normal;
+  color: #000;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+/* page-cart */
+#panier-container {
+  max-width: 1440px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Source Sans 3", sans-serif;
+  color: #000;
+  h1 {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ee7f43;
+  }
+  h2 {
+    font-size: 32px;
     font-weight: 400;
-    line-height: normal;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+  }
+  th,
+  td {
+    border: 1px solid #eee;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+  }
+  th {
+    background-color: #f3f3f3;
+    font-weight: 900;
+    color: #ee7f43;
+  }
+
+  input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    font-size: 18px;
+    border: 1px solid #ee7f43;
+    text-align: center;
+    font-family: "Source Sans 3", sans-serif;
+  }
+  .total {
+    font-size: 32px;
+    font-weight: 400;
+    color: #ee7f43;
+    text-align: right;
+    margin-bottom: 40px;
+  }
+  .btn-checkout {
+    display: block;
+    background-color: #ee7f43;
+    color: #fff;
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    font-size: 29px;
+    text-align: center;
+    padding: 15px 0;
+    width: 300px;
+    margin: auto;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .delete-article {
+    background-color: #ee7f43;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    text-align: center;
+    padding: 5px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .btn-checkout:hover,
+  .delete-article:hover {
+    background-color: #d86f2d;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-group {
+    max-width: 960px;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #000;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ee7f43;
+    border-radius: 5px;
+    font-family: "Source Sans 3", sans-serif;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+  }
 }

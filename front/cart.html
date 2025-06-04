@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>TITRE DE L'OEUVRE - GeniArtHub</title>
+  </head>
+  <body class="page">
+    <header>
+      <div>
+        <a href="index.html">
+          <img src="img/logo-black.png" alt="Logo GeniArtHub version sombre" />
+        </a>
+        <a href="cart.html"><img src="img/cart.svg" alt="Aller au panier" /></a>
+      </div>
+    </header>
+
+    <main id="panier-container">
+      <section>
+        <h1>Mon Panier</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>NOM</th>
+              <th>Format</th>
+              <th>Prix Unitaire</th>
+              <th>Quantité</th>
+              <th>Sous-total</th>
+              <th>Supprimer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Portrait Artistique</td>
+              <td>20x20</td>
+              <td>000€</td>
+              <td><input type="number" min="1" value="1" /></td>
+              <td>000€</td>
+              <td><button class="delete-article">×</button></td>
+            </tr>
+            <tr>
+              <td>Portrait Artistique</td>
+              <td>20x20</td>
+              <td>000€</td>
+              <td><input type="number" min="1" value="1" /></td>
+              <td>000€</td>
+              <td><button class="delete-article">×</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="total">Total : 000€</div>
+      </section>
+      <section>
+        <h2>Formulaire de commande</h2>
+        <form class="form-group">
+          <div class="form-row">
+            <div>
+              <label for="prenom">Prénom: </label>
+              <input type="text" name="prenom" />
+            </div>
+            <div>
+              <label for="nom">Nom: </label>
+              <input type="text" name="nom" />
+            </div>
+            <div>
+              <label for="adresse">Adresse: </label>
+              <input type="text" name="adresse" />
+            </div>
+            <div>
+              <label for="mail">Email: </label>
+              <input type="text" name="mail" />
+            </div>
+          </div>
+        </form>
+      </section>
+      <div>
+        <a href="#" class="btn-checkout">Valider à la commande</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        <a href="https://www.errantecreation.com/">Errante Creation</a> © 2023 -
+        GeniArtHub
+      </p>
+    </footer>
+    <script src="js/order.js"></script>
+  </body>
+</html>
