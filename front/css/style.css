@@ -390,6 +390,10 @@ article > div > div.price > p {
     border: 1px solid #ee7f43;
     border-radius: 5px;
     font-family: "Source Sans 3", sans-serif;
+    &:focus {
+      outline: none;
+      border-color: #d86f2d;
+    }
   }
   .form-row {
     display: grid;

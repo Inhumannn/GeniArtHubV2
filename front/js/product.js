@@ -1,7 +1,7 @@
 async function init() {
   const data = await getData();
   displayData(data);
-  console.log(data);
+  getLocalStorage(data);
 }
 init();
 
@@ -97,9 +97,37 @@ function displayData({ titre, image, description, declinaisons, shorttitle }) {
     }
 
     alert(
-      `Vous avez ajouté ${quantity} exemplaire(s) de ${shorttitle} (${format}) au panier pour un total de ${
+      `Vous avez ajouté ${quantity} exemplaire(s) de ${shorttitle} (${format}) au product pour un total de ${
         price * quantity
       }€`
     );
+  });
+}
+function getLocalStorage({ _id, titre, image, shorttitle, declinaisons }) {
+  const buttonBuy = document.querySelector(".button-buy");
+  buttonBuy.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const quantity = document.querySelector("#quantity").value;
+    const index = document.querySelector("#format").value;
+
+    if (index === "") {
+      return;
+    }
+
+    const format = declinaisons[index].taille;
+
+    const article = {
+      _id,
+      titre,
+      shorttitle,
+      image,
+      format,
+      quantity,
+    };
+
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    products.push(article);
+    localStorage.setItem("products", JSON.stringify(products));
   });
 }
