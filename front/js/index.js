@@ -14,5 +14,16 @@ async function getData() {
 }
 
 function displayData(data) {
-  console.log("Data received:", data);
+  console.log(data);
+  data.forEach(({ _id, titre, image }) => {
+    const article = `
+      <article>
+        <img src="${image}" alt="${titre}">
+        <a href="product.html?id=${_id}">${titre}</a>
+      </article>`;
+
+    document
+      .querySelector(".products")
+      .insertAdjacentHTML("beforeend", article);
+  });
 }
