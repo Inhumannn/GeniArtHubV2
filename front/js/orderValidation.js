@@ -34,6 +34,10 @@ function secureForm() {
   return valid;
 }
 
+async function getOrderNumber() {
+  console.log("Numéro de commande:", "123456789");
+}
+
 function orderValidation(message, title = "") {
   const modal = document.createElement("dialog");
 
@@ -73,5 +77,15 @@ btnvalid.addEventListener("click", (e) => {
 
   if (formValid) {
     orderValidation("Votre commande a bien été envoyée !", "Commande validée");
+    getOrderNumber();
   }
 });
+
+// La page confirmation de commande
+// La page de confirmation de commande doit afficher le numéro de commande récupéré depuis le back lors de la validation d'une commande.
+
+// Si le numéro de commande a bien été récupéré, les données dans les champs de formulaire de commande doivent être réinitialisées.
+
+// Les données du panier doivent également être vidées.
+
+// ne pas oublier d'arrondir le prix total du panier à 2 décimales.
