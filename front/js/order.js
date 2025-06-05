@@ -35,7 +35,8 @@ function mergeProducts(products) {
       (p) => p._id === product._id && p.format === product.format
     );
     if (merge) {
-      merge.quantity += product.quantity;
+      merge.quantity = Number(merge.quantity) + Number(product.quantity);
+      // Number() sinon additionne une chaîne de caractères
     } else {
       // { ...product } crées une copie indépendante, se qui permet de ne pas modifier l'original
       mergeArray.push({ ...product });
@@ -48,20 +49,18 @@ function mergeProducts(products) {
 function compareData(data, products) {
   const tbody = document.querySelector("tbody");
   let hasProducts = false;
+  let totalGeneral = 0;
 
   products.forEach((product) => {
-    const items = data.find((item) => {
-      // stop la boucle contrairement à forEach
-      // on cherche dans le tableau data si l'id du produit correspond à un id d'un item
-      return item._id === product._id;
-    });
+    const items = data.find((item) => item._id === product._id);
     if (items) {
-      const declinaison = items.declinaisons.find((d) => {
-        return d.taille === product.format;
-      });
+      const declinaison = items.declinaisons.find(
+        (d) => d.taille === product.format
+      );
       if (declinaison) {
         hasProducts = true;
         const total = declinaison.prix * product.quantity;
+        totalGeneral += total; // ajouter au total général
         const article = `
           <tr>
             <td>${product.titre}</td>
@@ -69,7 +68,7 @@ function compareData(data, products) {
             <td>${declinaison.prix}€</td>
             <td>${product.quantity}</td>
             <td>${total}€</td>
-            <td><button class="delete-article">×</button></td>
+            <td><button class="delete-article" data-id="${product._id}" data-format="${product.format}">×</button></td>
           </tr>
         `;
         tbody.insertAdjacentHTML("beforeend", article);
@@ -81,13 +80,32 @@ function compareData(data, products) {
     tbody.innerHTML = "<tr><td colspan='6'>Panier vide</td></tr>";
     console.log("Le panier est vide");
   }
+
+  const totalPrice = document.querySelector(".total");
+  if (totalPrice) {
+    totalPrice.textContent = `${totalGeneral}€`;
+  }
 }
 
-function deleteProduct() {
+function deleteProduct(products) {
   const deleteButtons = document.querySelectorAll(".delete-article");
+
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      console.log("Suppression du produit");
+      const id = button.dataset.id; // récupère l'id et le format du produit à supprimer
+      const format = button.dataset.format; // data-id et data-format sur le bouton
+
+      for (let i = 0; i < products.length; i++) {
+        if (products[i]._id === id && products[i].format === format) {
+          products[i].quantity -= 1;
+          if (products[i].quantity <= 0) {
+            products.splice(i, 1);
+          }
+          localStorage.setItem("products", JSON.stringify(products));
+          location.reload();
+          break;
+        }
+      }
     });
   });
 }
