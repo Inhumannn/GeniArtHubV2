@@ -78,7 +78,6 @@ function compareData(data, products) {
 
   if (!hasProducts) {
     tbody.innerHTML = "<tr><td colspan='6'>Panier vide</td></tr>";
-    console.log("Le panier est vide");
   }
 
   const totalPrice = document.querySelector(".total");

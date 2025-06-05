@@ -403,3 +403,13 @@ article > div > div.price > p {
     width: 100%;
   }
 }
+dialog {
+  width: 500px;
+  margin: auto;
+  padding: 1.5em;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  font-family: sans-serif;
+  text-align: center;
+}
