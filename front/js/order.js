@@ -1,6 +1,8 @@
+let products = [];
+
 async function init() {
   const data = await getData();
-  const products = await recoverLocalStorage();
+  products = await recoverLocalStorage();
   compareData(data, products);
   deleteProduct(products);
 }
@@ -15,7 +17,7 @@ async function getData() {
   }
 }
 
-function recoverLocalStorage() {
+async function recoverLocalStorage() {
   try {
     const products = JSON.parse(localStorage.getItem("products")) || [];
     return mergeProducts(products);
@@ -48,6 +50,7 @@ function mergeProducts(products) {
 
 function compareData(data, products) {
   const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
   let hasProducts = false;
   let totalGeneral = 0;
 
@@ -59,16 +62,19 @@ function compareData(data, products) {
       );
       if (declinaison) {
         hasProducts = true;
-        const total = declinaison.prix * product.quantity;
-        totalGeneral += total; // ajouter au total général
+        const total =
+          Math.round(declinaison.prix * product.quantity * 100) / 100; // arrondir à 2 décimales
+        totalGeneral += total;
         const article = `
           <tr>
             <td>${product.titre}</td>
             <td>${product.format}</td>
             <td>${declinaison.prix}€</td>
             <td>${product.quantity}</td>
-            <td>${total}€</td>
-            <td><button class="delete-article" data-id="${product._id}" data-format="${product.format}">×</button></td>
+            <td>${total.toFixed(2)}€</td>
+            <td><button class="delete-article" data-id="${
+              product._id
+            }" data-format="${product.format}">×</button></td>
           </tr>
         `;
         tbody.insertAdjacentHTML("beforeend", article);
@@ -82,7 +88,7 @@ function compareData(data, products) {
 
   const totalPrice = document.querySelector(".total");
   if (totalPrice) {
-    totalPrice.textContent = `${totalGeneral}€`;
+    totalPrice.textContent = `${totalGeneral.toFixed(2)}€`; // arrondir à 2 décimales
   }
 }
 
@@ -108,3 +114,123 @@ function deleteProduct(products) {
     });
   });
 }
+
+// orderValidation
+function secureForm(contact) {
+  const form = document.querySelector(".form-group");
+  const datas = new FormData(form);
+  let valid = true;
+
+  if (datas.get("prenom") === null || datas.get("prenom").length < 2) {
+    console.log("Le prénom doit contenir au moins 2 caractères");
+    valid = false;
+  }
+
+  if (datas.get("nom") === null || datas.get("nom").length < 2) {
+    console.log("Le nom doit contenir au moins 2 caractères");
+    valid = false;
+  }
+
+  if (datas.get("adresse") === null || datas.get("adresse").length < 10) {
+    console.log("L'adresse doit contenir au moins 10 caractères");
+    valid = false;
+  }
+
+  const email = datas.get("mail");
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  if (email === null || !emailRegex.test(email)) {
+    console.log("L'email n'est pas valide");
+    valid = false;
+  }
+
+  if (valid) {
+    console.log("Le formulaire est valide.");
+
+    const form = document.querySelector(".form-group");
+    const datas = new FormData(form);
+
+    return {
+      firstName: datas.get("prenom"),
+      lastName: datas.get("nom"),
+      address: datas.get("adresse"),
+      ville: "Paris",
+      email: datas.get("mail"),
+    };
+  }
+}
+
+async function getOrderNumber(contact, products) {
+  try {
+    const req = await fetch("http://localhost:3000/api/products/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ contact, products }),
+    });
+
+    const res = await req.json();
+    console.log("Numéro de commande:", res.orderId);
+
+    localStorage.setItem("orderId", res.orderId);
+    // localStorage.removeItem("products"); // Vide le panier
+    // document.querySelector(".form-group").reset(); // Réinitialise le formulaire
+    // window.location.href = "confirmation.html"; // Redirige vers une page de confirmation
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération du numéro de commande:",
+      error
+    );
+  }
+}
+
+function orderValidation(message, title = "") {
+  const modal = document.createElement("dialog");
+
+  if (title) {
+    const h1 = document.createElement("h1");
+    h1.textContent = title;
+    modal.appendChild(h1);
+  }
+  if (message) {
+    const p = document.createElement("p");
+    p.textContent = message;
+    modal.appendChild(p);
+  }
+
+  document.body.appendChild(modal);
+  modal.showModal();
+
+  setTimeout(() => {
+    modal.close();
+    modal.remove();
+  }, 3000);
+}
+
+const btnvalid = document.querySelector(".btn-checkout");
+btnvalid.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const contact = secureForm();
+
+  if (!contact) {
+    console.log("");
+    orderValidation(
+      "Veuillez corriger les erreurs dans le formulaire.",
+      "Erreur de validation"
+    );
+    return;
+  }
+
+  try {
+    await getOrderNumber(contact, products);
+    orderValidation("Votre commande a bien été envoyée !", "Commande validée");
+  } catch (err) {
+    orderValidation(err, "Erreur de commande");
+    console.error(err);
+  }
+});
+
+// console err
+// Le formulaire est valide.
+//POST http://localhost:3000/api/products/order 400 (Bad Request)
+//Numéro de commande: undefined
