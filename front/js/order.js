@@ -1,10 +1,10 @@
-let products = [];
+let products = []; // Tableau pour stocker les produits du panier pour plus tard
 
 async function init() {
-  const data = await getData();
-  products = await recoverLocalStorage();
-  compareData(data, products);
-  deleteProduct(products);
+  const data = await getData(); // Récupère les données de l'API
+  products = await recoverLocalStorage(); // Récupère les produits du localStorage
+  compareData(data, products); // Compare les données de l'API avec celles du localStorage
+  deleteProduct(products); // Ajoute la fonctionnalité de suppression des produits du panier
 }
 init();
 
@@ -50,9 +50,9 @@ function mergeProducts(products) {
 
 function compareData(data, products) {
   const tbody = document.querySelector("tbody");
-  tbody.innerHTML = "";
-  let hasProducts = false;
-  let totalGeneral = 0;
+  tbody.innerHTML = ""; // Vide le tbody avant de le remplir
+  let hasProducts = false; // Indique s'il y a des produits à afficher
+  let totalGeneral = 0; // Initialise le total général à 0
 
   products.forEach((product) => {
     const items = data.find((item) => item._id === product._id);
@@ -83,11 +83,13 @@ function compareData(data, products) {
   });
 
   if (!hasProducts) {
+    // Si aucun produit n'est trouvé, on affiche un message
     tbody.innerHTML = "<tr><td colspan='6'>Panier vide</td></tr>";
   }
 
   const totalPrice = document.querySelector(".total");
   if (totalPrice) {
+    // si totalPrice existe on affiche
     totalPrice.textContent = `${totalGeneral.toFixed(2)}€`; // arrondir à 2 décimales
   }
 }
@@ -101,11 +103,16 @@ function deleteProduct(products) {
       const format = button.dataset.format; // data-id et data-format sur le bouton
 
       for (let i = 0; i < products.length; i++) {
+        // Parcourt le tableau products pour trouver le produit à supprimer
         if (products[i]._id === id && products[i].format === format) {
+          // Si le produit est trouvé, on le supprime
           products[i].quantity -= 1;
+          // On décrémente la quantité du produit de 1
           if (products[i].quantity <= 0) {
-            products.splice(i, 1);
+            // Si la quantité est inférieure ou égale à 0, on supprime le produit du tableau
+            products.splice(i, 1); // Supprime le produit du tableau avec splice
           }
+          // Met à jour le localStorage avec le tableau modifié
           localStorage.setItem("products", JSON.stringify(products));
           location.reload();
           break;
@@ -118,9 +125,10 @@ function deleteProduct(products) {
 // orderValidation
 function secureForm(contact) {
   const form = document.querySelector(".form-group");
-  const datas = new FormData(form);
-  let valid = true;
+  const datas = new FormData(form); // Récupère les données du formulaire
+  let valid = true; // Variable pour vérifier la validité du formulaire
 
+  // Vérification des champs du formulaire si null ou trop courts
   if (datas.get("prenom") === null || datas.get("prenom").length < 2) {
     console.log("Le prénom doit contenir au moins 2 caractères");
     valid = false;
@@ -137,12 +145,13 @@ function secureForm(contact) {
   }
 
   const email = datas.get("mail");
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Regex pour valider l'email
   if (email === null || !emailRegex.test(email)) {
     console.log("L'email n'est pas valide");
     valid = false;
   }
 
+  // si le formulaire est valide
   if (valid) {
     console.log("Le formulaire est valide.");
 
@@ -172,7 +181,7 @@ async function getOrderNumber(contact, products) {
     const res = await req.json();
     console.log("Numéro de commande:", res.orderId);
 
-    localStorage.setItem("orderId", res.orderId);
+    localStorage.setItem("orderId", res.orderId); // Stocke le numéro de commande dans le localStorage
     // localStorage.removeItem("products"); // Vide le panier
     // document.querySelector(".form-group").reset(); // Réinitialise le formulaire
     // window.location.href = "confirmation.html"; // Redirige vers une page de confirmation
@@ -185,14 +194,17 @@ async function getOrderNumber(contact, products) {
 }
 
 function orderValidation(message, title = "") {
+  // Crée un modal pour afficher le message de validation
   const modal = document.createElement("dialog");
 
   if (title) {
+    // Si un titre est fourni, on l'affiche
     const h1 = document.createElement("h1");
     h1.textContent = title;
     modal.appendChild(h1);
   }
   if (message) {
+    // Si un message est fourni, on l'affiche
     const p = document.createElement("p");
     p.textContent = message;
     modal.appendChild(p);
@@ -212,6 +224,7 @@ btnvalid.addEventListener("click", async (e) => {
   e.preventDefault();
   const contact = secureForm();
 
+  // Si le formulaire n'est pas valide, on affiche un message d'erreur
   if (!contact) {
     console.log("");
     orderValidation(
@@ -221,6 +234,7 @@ btnvalid.addEventListener("click", async (e) => {
     return;
   }
 
+  // Si le formulaire est valide, on envoie la commande
   try {
     await getOrderNumber(contact, products);
     orderValidation("Votre commande a bien été envoyée !", "Commande validée");
